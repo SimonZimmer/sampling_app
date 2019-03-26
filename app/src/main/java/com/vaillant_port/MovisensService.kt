@@ -7,8 +7,10 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
 import android.util.Log
+import android.app.Notification
 
-class MovisenseService : Service() {
+
+class MovisensService : Service() {
 
     val machineState = com.vaillant_port.MachineState("machine")
 
@@ -16,9 +18,14 @@ class MovisenseService : Service() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action == ("com.vaillant_port.movisens_receiver")) {
                 Log.d("debug", "Broadcast received")
+                val data = intent.dataString
+                Log.d("debug", "data = $data")
+
+                val stopIntent = Intent(context, MainActivity::class.java)
+                stopService(stopIntent)
             }
 
-            machineState.setCurrentState("state2")
+            machineState.setCurrentState(42)
             val state = machineState.getCurrentState()
             Log.d("debug", "current state of machine = $state")
         }
@@ -33,7 +40,17 @@ class MovisenseService : Service() {
         theFilter.addAction(intentName)
         registerReceiver(this.movisens_receiver, theFilter)
 
-        return Service.START_NOT_STICKY
+        return Service.START_STICKY
+    }
+
+    private fun showLocationNotification() {
+        val notification = Notification.Builder(this)
+            .setContentTitle("Service")
+            .setContentText("Service Started Successfully")
+            .setSmallIcon(R.mipmap.sym_def_app_icon)
+            .build()
+
+        startForeground(1, notification)
     }
 
     override fun onBind(intent: Intent): IBinder? {
@@ -41,9 +58,9 @@ class MovisenseService : Service() {
         return null
     }
 
-    //override fun onDestroy() {
-    //    super.onDestroy()
-    //    stopService(Intent(this, MovisenseService::class.java))
-    //    unregisterReceiver(this.movisens_receiver)
-    //}
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(this.movisens_receiver)
+        Log.d("debug", "service stopped")
+    }
 }

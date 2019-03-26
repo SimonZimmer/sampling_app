@@ -10,9 +10,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("debug","app started")
-        val launchIntent = Intent(this, MovisenseService::class.java)
+        val launchIntent = Intent(this, MovisensService::class.java)
         startService(launchIntent)
         finish()
     }
-
 }
