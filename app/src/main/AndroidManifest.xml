@@ -10,7 +10,6 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <service
-                android:name=".ChangeOperationStatus"
                 android:enabled="true"
                 android:exported="true">
         </service>
@@ -32,9 +31,7 @@
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
-
                 <action android:name="StartMovisenseService"/>
             </intent-filter>
         </service>
