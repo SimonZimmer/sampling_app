@@ -2,20 +2,16 @@ package com.vaillant_port
 
 class MachineState(val name: String) {
 
-    private var current_state = "no_state"
+    private var current_state = 1
 
-    val all_states = mapOf(
-        "no_state" to null,
-        "state_1" to "we5",
-        "state_2" to "sdf"
-    )
+    val all_states = Array<Int>(50, { i -> (i + 1) })
 
-    fun getCurrentState(): String {
+    fun getCurrentState(): Int {
 
         return current_state
     }
 
-    fun setCurrentState(state: String) {
+    fun setCurrentState(state: Int) {
 
         current_state = state
     }
