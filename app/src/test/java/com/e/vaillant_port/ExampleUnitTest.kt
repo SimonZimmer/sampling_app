@@ -1,4 +1,4 @@
-package com.vaillant_port
+package com.e.vaillant_port
 
 import org.junit.Test
 

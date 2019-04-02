@@ -1,4 +1,3 @@
 <resources>
-    <string name="app_name">Vaillant Port</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="app_name">vaillant_port</string>
 </resources>
