@@ -32,7 +32,6 @@ class MovisensService : Service() {
         }
     }
 
-
     override fun onCreate(){
         super.onCreate()
 
@@ -46,7 +45,7 @@ class MovisensService : Service() {
         val notificationIntent = Intent(this, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0)
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("Movisens_Vaillant Port Service currently running")
+            .setContentTitle("vaillant_port")
             .setContentText(input)
             .setSmallIcon(R.drawable.ic_android)
             .setContentIntent(pendingIntent)
