@@ -10,7 +10,8 @@ import android.os.IBinder
 import android.support.v4.app.NotificationCompat
 import android.util.Log
 import com.e.vaillant_port.Main_App.Companion.CHANNEL_ID
-import java.util.regex.Matcher
+
+
 
 class MovisensService : Service() {
 
@@ -82,8 +83,15 @@ class MovisensService : Service() {
                else {
                    machineState.setCurrentState(50)
                }
-               received_data = ""
            }
         }
+    }
+
+    // TODO: call this method when a study in Movisens should be initialized
+    fun sendBroadcastToMovisens() {
+        val reason = "High Heart Rate: 160bpm"
+        val intent = Intent("com.e.vaillant_port.myBroadcast")
+        intent.putExtra("value", reason)
+        sendBroadcast(intent)
     }
 }
