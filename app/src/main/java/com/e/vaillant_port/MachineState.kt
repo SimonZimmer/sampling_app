@@ -1,5 +1,7 @@
 package com.e.vaillant_port
 
+import android.util.Log
+
 class MachineState(val name: String) {
 
     private var current_state = 1
@@ -12,7 +14,7 @@ class MachineState(val name: String) {
     }
 
     fun setCurrentState(state: Int) {
-
+        Log.d("debug_message", "state changed from $current_state to $state")
         current_state = state
     }
 }

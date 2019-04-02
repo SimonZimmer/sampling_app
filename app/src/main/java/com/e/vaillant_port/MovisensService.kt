@@ -10,6 +10,7 @@ import android.os.IBinder
 import android.support.v4.app.NotificationCompat
 import android.util.Log
 import com.e.vaillant_port.Main_App.Companion.CHANNEL_ID
+import java.util.regex.Matcher
 
 class MovisensService : Service() {
 
@@ -18,17 +19,12 @@ class MovisensService : Service() {
     private var movisens_receiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action == ("com.e.vaillant_port.movisens_receiver")) {
-                Log.d("debug_message", "Broadcast received")
+                Log.d("debug_message", "Broadcast received:")
                 val data = intent.data
-                Log.d("debug_message", "data = $data")
-
-                val stopIntent = Intent(context, MainActivity::class.java)
-                stopService(stopIntent)
+                if (data != null) {
+                    parseBroadcast(data.toString())
+                }
             }
-
-            machineState.setCurrentState(42)
-            val state = machineState.getCurrentState()
-            Log.d("debug_message", "current state of machine = $state")
         }
     }
 
@@ -69,5 +65,25 @@ class MovisensService : Service() {
 
     override fun onBind(intent:Intent): IBinder? {
         return null
+    }
+
+    fun parseBroadcast(data: String) {
+        var received_data = data
+
+        when (received_data) {
+           "content:stop_service" -> {
+               stopSelf()
+           }
+           "content:start_machine_state_1" -> {
+               var state = machineState.getCurrentState()
+               if (state < 50) {
+                   machineState.setCurrentState(state + 1)
+               }
+               else {
+                   machineState.setCurrentState(50)
+               }
+               received_data = ""
+           }
+        }
     }
 }
