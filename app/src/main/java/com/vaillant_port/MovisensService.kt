@@ -7,8 +7,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
 import android.util.Log
-import android.app.Notification
-
 
 class MovisensService : Service() {
 
@@ -18,7 +16,7 @@ class MovisensService : Service() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action == ("com.vaillant_port.movisens_receiver")) {
                 Log.d("debug", "Broadcast received")
-                val data = intent.dataString
+                val data = intent.data
                 Log.d("debug", "data = $data")
 
                 val stopIntent = Intent(context, MainActivity::class.java)
@@ -35,22 +33,16 @@ class MovisensService : Service() {
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         Log.d("debug","service started")
 
-        val intentName = "com.vaillant_port.movisens_receiver"
-        val theFilter = IntentFilter()
-        theFilter.addAction(intentName)
-        registerReceiver(this.movisens_receiver, theFilter)
+        //val intentName = "com.vaillant_port.movisens_receiver"
+
+        val intentFilter = IntentFilter("com.vaillant_port.movisens_receiver")
+        intentFilter.addDataScheme("content")
+
+        //val theFilter = IntentFilter()
+        //theFilter.addAction(intentName)
+        registerReceiver(this.movisens_receiver, intentFilter)
 
         return Service.START_STICKY
-    }
-
-    private fun showLocationNotification() {
-        val notification = Notification.Builder(this)
-            .setContentTitle("Service")
-            .setContentText("Service Started Successfully")
-            .setSmallIcon(R.mipmap.sym_def_app_icon)
-            .build()
-
-        startForeground(1, notification)
     }
 
     override fun onBind(intent: Intent): IBinder? {
