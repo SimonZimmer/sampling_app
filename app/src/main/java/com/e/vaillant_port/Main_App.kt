@@ -19,12 +19,12 @@ class Main_App : Application(){
     // TODO: make this backwards compatible for API Level < 26
     fun createNotificationChannel() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            var serviceChannel = NotificationChannel(
+            val serviceChannel = NotificationChannel(
                 CHANNEL_ID,
                 "MovisensServiceChannel",
                 NotificationManager.IMPORTANCE_DEFAULT
             )
-            var manager = getSystemService(NotificationManager::class.java)
+            val manager = getSystemService(NotificationManager::class.java)
             manager.createNotificationChannel(serviceChannel)
         }
     }

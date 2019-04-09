@@ -12,7 +12,6 @@ import android.util.Log
 import com.e.vaillant_port.Main_App.Companion.CHANNEL_ID
 
 
-
 class MovisensService : Service() {
 
     val machineState = com.e.vaillant_port.MachineState("machine")
@@ -29,7 +28,7 @@ class MovisensService : Service() {
         }
     }
 
-    override fun onCreate(){
+    override fun onCreate() {
         super.onCreate()
 
     }
@@ -44,7 +43,7 @@ class MovisensService : Service() {
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("vaillant_port")
             .setContentText(input)
-            .setSmallIcon(R.drawable.ic_android)
+            .setSmallIcon(R.drawable.ic_hsd_logo)
             .setContentIntent(pendingIntent)
             .build()
 
