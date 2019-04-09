@@ -30,7 +30,6 @@ class MovisensService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
@@ -68,14 +67,14 @@ class MovisensService : Service() {
     }
 
     fun parseBroadcast(data: String) {
-        var received_data = data
+        val received_data = data
 
         when (received_data) {
            "content:stop_service" -> {
                stopSelf()
            }
            "content:start_machine_state_1" -> {
-               var state = machineState.getCurrentState()
+               val state = machineState.getCurrentState()
                if (state < 50) {
                    machineState.setCurrentState(state + 1)
                }
