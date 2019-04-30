@@ -2,7 +2,7 @@ package com.e.vaillant_port
 
 import android.util.Log
 
-class MachineState() {
+class MachineState {
 
     private val all_states = Array<Int>(50, { i -> (i + 1) })
     private var current_state = all_states[0]

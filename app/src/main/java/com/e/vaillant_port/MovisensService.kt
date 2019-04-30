@@ -14,7 +14,7 @@ import com.e.vaillant_port.Main_App.Companion.CHANNEL_ID
 
 class MovisensService : Service() {
 
-    val machineState = com.e.vaillant_port.MachineState("machine")
+    val machineState = com.e.vaillant_port.MachineState()
 
     private var movisens_receiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
